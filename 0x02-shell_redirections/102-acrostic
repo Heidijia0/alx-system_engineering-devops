@@ -1,0 +1,2 @@
+#!/bin/bash
+ccut -c 1 | paste -s -d "
