@@ -1,42 +1,52 @@
-# 0x19. Postmortem
-This project is a sweet one.
+**Issue Summary:**
+- **Duration:** 4 hours, from 09:00 to 13:00 (UTC)
+- **Impact:** Email delivery service outage; 30% of users experienced delayed or undelivered emails.
 
+**Timeline:**
+- **09:00:** Issue detected by monitoring system - spike in email delivery latency.
+- **09:15:** Engineering team alerted through automated monitoring.
+- **09:30:** Initial investigation focused on email servers and network infrastructure.
+- **10:00:** Assumed root cause was a server overload due to increased traffic.
+- **10:30:** Escalation to the DevOps team for further infrastructure insights.
+- **11:00:** Misleading investigation into a potential DDoS attack.
+- **11:30:** Incident escalated to senior engineering and DevOps leadership.
+- **12:00:** Identified a misconfigured network switch causing packet loss.
+- **13:00:** Issue resolved; email service performance back to normal.
 
-Any software system will eventually fail, and that failure can come stem from a wide range of possible factors: bugs, traffic spikes, security issues, hardware failures, natural disasters, human error… Failing is normal and failing is actually a great opportunity to learn and improve. Any great Software Engineer must learn from his/her mistakes to make sure that they won’t happen again. Failing is fine, but failing twice because of the same issue is not.
+**Root Cause and Resolution:**
+- **Root Cause:** A misconfigured network switch was dropping packets intermittently, leading to email delivery delays.
+- **Resolution:** Reconfigured the network switch settings to eliminate packet loss and restore normal email service operation.
 
+**Corrective and Preventative Measures:**
+- **To Improve/Fix:**
+  1. **Network Configuration Audits:** Regularly audit and validate network configurations to catch potential misconfigurations early.
+  2. **Enhanced Monitoring:** Implement more granular monitoring for network performance to quickly identify anomalies.
+  3. **Automated Incident Response:** Develop automated response scripts for common network issues to expedite resolution.
 
-A postmortem is a tool widely used in the tech industry. After any outage, the team(s) in charge of the system will write a summary that has 2 main goals:
+- **Tasks to Address the Issue:**
+  1. **Network Switch Configuration Review:** Conduct an immediate review of all network switch configurations to identify and rectify potential misconfigurations.
+  2. **Monitoring System Upgrade:** Enhance monitoring tools to provide real-time alerts for packet loss and other network-related issues.
+  3. **Incident Response Automation:** Develop scripts to automate response procedures for known network issues to minimize downtime.
+  
+**Postmortem Analysis:**
 
+**Issue Detection:**
+The issue was initially detected by our monitoring system, which identified a sudden spike in email delivery latency. This triggered an automated alert that notified the engineering team, allowing for a swift response.
 
-- To provide the rest of the company’s employees easy access to information detailing the cause of the outage. Often outages can have a huge impact on a company, so managers and executives have to understand what happened and how it will impact their work.
-- And to ensure that the root cause(s) of the outage has been discovered and that measures are taken to make sure it will be fixed.
+**Actions Taken:**
+The initial investigation focused on the email servers and broader network infrastructure, assuming a server overload due to increased traffic. However, this assumption led to a misleading path of investigating a potential DDoS attack. Escalation to the DevOps team provided insights into the infrastructure, ultimately leading to the identification of the misconfigured network switch.
 
+**Misleading Paths:**
+The assumption of a server overload and subsequent investigation into a DDoS attack proved to be misleading. This highlights the importance of remaining open to various possibilities during the initial stages of issue resolution.
 
-Using one of the web stack debugging project issue I have previously done or an outage I have personally faced, I am required to write a postmortem.
+**Escalation:**
+The incident was escalated first to the DevOps team and later to senior engineering and DevOps leadership as the complexity and severity of the issue became apparent.
 
-## Requirements:
+**Resolution:**
+The root cause, a misconfigured network switch causing packet loss, was identified and promptly addressed by reconfiguring the switch settings. This resolved the issue, restoring email service performance to normal levels.
 
-- Issue Summary (that is often what executives will read) must contain:
-    - duration of the outage with start and end times (including timezone)
-    - what was the impact (what service was down/slow? What were user experiencing? How many % of the users were affected?)
-    - what was the root cause
+**Lessons Learned:**
+This incident underscores the critical need for meticulous network configuration reviews and the importance of robust monitoring systems. Implementing automated incident response procedures for known issues can significantly reduce downtime and enhance the overall resilience of our services.
 
-- Timeline (format bullet point, format: time - keep it short, 1 or 2 sentences) must contain:
-    - when was the issue detected
-    - how was the issue detected (monitoring alert, an   engineer noticed something, a customer complained…)
-    - actions taken (what parts of the system were investigated, what were the assumption on the root cause of the issue)
-    - misleading investigation/debugging paths that were taken
-    - which team/individuals was the incident escalated to
-    - how the incident was resolved
-
-- Root cause and resolution must contain:
-    - explain in detail what was causing the issue
-    - explain in detail how the issue was fixed
-
-- Corrective and preventative measures must contain:
-    - what are the things that can be improved/fixed (broadly speaking)
-    - a list of tasks to address the issue (be very specific, like a TODO, example: patch Nginx server, add monitoring on server memory…)
-- Be brief and straight to the point, between 400 to 600 words
-
-## Resources
-[Apiumhub](https://apiumhub.com/tech-blog-barcelona/software-development-project-postmortem/)
+**Conclusion:**
+The outage, though disruptive, served as a valuable learning experience. By implementing the corrective measures and addressing specific tasks outlined in this postmortem, we aim to fortify our systems against similar issues in the future, ensuring the continued reliability of our services.
